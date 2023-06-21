@@ -1,0 +1,96 @@
+<script>
+  function validateFields(event) {
+    console.log(event.target);
+
+    let emailEle = document.getElementById("email");
+    let emailWarnEle = document.getElementById("emailWarning");
+    let passwordEle = document.getElementById("password");
+    let passwordWarnEle = document.getElementById("passwordWarning");
+
+    let email = emailEle.value;
+    let password = passwordEle.value;
+
+    let emailRegex = RegExp(
+      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    );
+
+    let match = emailRegex.test(email);
+    if (!match) {
+      emailEle.classList.add("ring-red-700");
+      emailWarnEle.classList.remove("hidden");
+      event.preventDefault();
+      return;
+    } else {
+      emailEle.classList.remove("ring-red-700");
+      emailWarnEle.classList.add("hidden");
+    }
+
+    if (password.length < 8) {
+      passwordEle.classList.add("ring-red-700");
+      passwordWarnEle.classList.remove("hidden");
+      event.preventDefault();
+      return;
+    } else {
+      passwordEle.classList.remove("ring-red-700");
+      passwordWarnEle.classList.add("hidden");
+    }
+  }
+</script>
+
+<div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8 mb-20">
+  <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+    <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Sign in to your account</h2>
+  </div>
+
+  <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+    <form class="space-y-6" method="POST" onsubmit="validateFields(event)">
+      <div>
+        <label for="email" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>
+        <div class="mt-2">
+          <input
+            id="email"
+            value="umar786089@gmail.com"
+            name="email"
+            type="email"
+            autocomplete="email"
+            required
+            class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-yellow-400 sm:text-sm sm:leading-6"
+          />
+          <p class="text-red-700 hidden text-sm" id="emailWarning">Please Enter Valid Email</p>
+        </div>
+      </div>
+
+      <div>
+        <div class="flex items-center justify-between">
+          <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Password</label>
+        </div>
+        <div class="mt-2">
+          <input
+            value="12345678"
+            id="password"
+            name="password"
+            type="password"
+            autocomplete="current-password"
+            required
+            class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-yellow-400 sm:text-sm sm:leading-6"
+          />
+          <p class="text-red-700 hidden text-sm" id="passwordWarning">Password must be 8 characters long</p>
+        </div>
+      </div>
+
+      <div>
+        <button
+          type="submit"
+          class="flex w-full justify-center bg-yellow-400 rounded-md px-3 py-1.5 text-sm font-semibold leading-6 text-black shadow-sm hover:bg-yellow-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-yellow-400"
+        >
+          Sign in
+        </button>
+      </div>
+
+      <p class="mt-10 text-center text-sm text-gray-500">
+        Not a member?
+        <a href="/register" class="font-semibold leading-6 text-yellow-600 hover:text-yellow-500">Register for free</a>
+      </p>
+    </form>
+  </div>
+</div>

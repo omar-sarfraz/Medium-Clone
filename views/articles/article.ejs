@@ -1,0 +1,52 @@
+<div class="flex justify-center p-6">
+  <div class="w-screen max-w-5xl flex-auto overflow-hidden rounded-3xl bg-white text-sm leading-6 shadow-lg ring-1 ring-gray-900/5 py-8 px-10">
+    <div class="flex justify-between items-center mb-10">
+      <div class="flex items-center gap-6 flex-wrap">
+        <h3 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl"><%= article.title %></h3>
+        <a href="#" class="relative z-10 rounded-full bg-gray-200 px-3 py-1 font-medium text-gray-600 hover:bg-gray-100"
+          ><%= article.category.name %></a
+        >
+      </div>
+      <% if (user) { if(user._id === article.owner_id._id.toString() || user.isAdmin){ %>
+      <div class="flex items-center gap-3">
+        <% if (user._id === article.owner_id._id.toString()) { %>
+        <a href="/article/edit/<%= article._id %>" class="flex flex-col items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24">
+            <path fill="currentColor" d="m18.988 2.012l3 3L19.701 7.3l-3-3zM8 16h3l7.287-7.287l-3-3L8 13z" />
+            <path
+              fill="currentColor"
+              d="M19 19H8.158c-.026 0-.053.01-.079.01c-.033 0-.066-.009-.1-.01H5V5h6.847l2-2H5c-1.103 0-2 .896-2 2v14c0 1.104.897 2 2 2h14a2 2 0 0 0 2-2v-8.668l-2 2V19z"
+            />
+          </svg>
+          <p class="text-base text-gray-700">Edit</p>
+        </a>
+        <% } %>
+        <a href="/article/delete/<%= article._id %>" class="flex flex-col items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28">
+            <path
+              fill="currentColor"
+              d="M11.5 6h5a2.5 2.5 0 0 0-5 0ZM10 6a4 4 0 0 1 8 0h6.25a.75.75 0 0 1 0 1.5h-1.31l-1.217 14.603A4.25 4.25 0 0 1 17.488 26h-6.976a4.25 4.25 0 0 1-4.235-3.897L5.06 7.5H3.75a.75.75 0 0 1 0-1.5H10ZM7.772 21.978a2.75 2.75 0 0 0 2.74 2.522h6.976a2.75 2.75 0 0 0 2.74-2.522L21.436 7.5H6.565l1.207 14.478ZM11.75 11a.75.75 0 0 1 .75.75v8.5a.75.75 0 0 1-1.5 0v-8.5a.75.75 0 0 1 .75-.75Zm5.25.75a.75.75 0 0 0-1.5 0v8.5a.75.75 0 0 0 1.5 0v-8.5Z"
+            />
+          </svg>
+          <p class="text-base text-gray-700">Delete</p>
+        </a>
+      </div>
+      <% }} %>
+    </div>
+
+    <div class="w-full flex justify-center mb-10">
+      <img src="data:image/png;base64,<%= article.cover_img %>" alt="" class="h-3/4 w-4/6 bg-gray-50 rounded-md object-cover" />
+    </div>
+    <p class="text-lg text-gray-900"><%= article.article %></p>
+
+    <div class="relative mt-8 flex items-center gap-x-4">
+      <img src="data:image/png;base64,<%= article.owner_id.profile_img %>" alt="" class="h-10 w-10 rounded-full bg-gray-50" />
+      <div class="text-sm leading-6">
+        <p class="font-semibold text-gray-900">
+          <a href="/profile/<%= article.owner_id._id.toString() %>"> <%= article.owner_id.name %> </a>
+        </p>
+        <p class="text-sm leading-6 text-slate-400">Author</p>
+      </div>
+    </div>
+  </div>
+</div>
