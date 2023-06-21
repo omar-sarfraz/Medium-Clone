@@ -48,6 +48,9 @@ router.post("/register", upload.single("image"), async (req, res) => {
 
   let image = fs.readFileSync(req.file.path, "base64");
 
+  // Deleting the file from FileSystem
+  fs.rmSync(req.file.path);
+
   let email = req.body.email;
   let existingUser = await User.find({ email: email });
 

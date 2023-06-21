@@ -49,6 +49,9 @@ router.post("/articles", sessionAuth, upload.single("image"), async function (re
 
   let image = fs.readFileSync(req.file.path, "base64");
 
+  // Deleting the file from FileSystem
+  fs.rmSync(req.file.path);
+
   let owner_id = req.session.user._id;
   let article = { ...req.body, owner_id, cover_img: image };
 
@@ -109,6 +112,8 @@ router.post("/article/edit/:id", sessionAuth, upload.single("image"), async (req
     // console.log(req.file);
     if (req.file) {
       let image = fs.readFileSync(req.file.path, "base64");
+      // Deleting the file from FileSystem
+      fs.rmSync(req.file.path);
       articleObj.cover_img = image;
     }
 

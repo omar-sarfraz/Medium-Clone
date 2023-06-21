@@ -18,6 +18,8 @@ router.post("/user/updateuser/:id", sessionAuth, upload.single("image"), async f
   // console.log(req.file, userObj);
   if (req.file) {
     let image = fs.readFileSync(req.file.path, "base64");
+    // Deleting the file from FileSystem
+    fs.rmSync(req.file.path);
     userObj.profile_img = image;
   }
 
