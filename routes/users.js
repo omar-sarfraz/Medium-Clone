@@ -3,7 +3,7 @@ const User = require("../models/User");
 
 const multer = require("multer");
 const fs = require("fs");
-const upload = multer({ dest: "uploads/" });
+const upload = multer({ dest: "/tmp/uploads/" });
 
 const sessionAuth = require("../middlewares/sessionAuth");
 

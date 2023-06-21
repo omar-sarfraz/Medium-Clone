@@ -9,7 +9,7 @@ let admin = require("../middlewares/adminAuth");
 
 const multer = require("multer");
 const fs = require("fs");
-const upload = multer({ dest: "uploads/" });
+const upload = multer({ dest: "/tmp/uploads/" });
 
 router.get("/login", (req, res) => {
   res.render("auth/login");

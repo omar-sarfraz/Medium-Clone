@@ -7,7 +7,7 @@ let router = express.Router();
 let Article = require("../models/Article");
 let Category = require("../models/Category");
 
-const upload = multer({ dest: "uploads/" });
+const upload = multer({ dest: "/tmp/uploads/" });
 
 let sessionAuth = require("../middlewares/sessionAuth");
 
