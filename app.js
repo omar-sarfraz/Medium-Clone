@@ -3,6 +3,7 @@ let app = express();
 let expressLayouts = require("express-ejs-layouts");
 let cookieParser = require("cookie-parser");
 let session = require("express-session");
+const MongoStore = require("connect-mongo");
 let Article = require("./models/Article");
 let Category = require("./models/Category");
 let dotenv = require("dotenv");
@@ -23,6 +24,7 @@ app.use(
     cookie: { maxAge: 600000 },
     resave: true,
     saveUninitialized: true,
+    store: new MongoStore({ mongoUrl: process.env.CONNECTION_URL }),
   })
 );
 
