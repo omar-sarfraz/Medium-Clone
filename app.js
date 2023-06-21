@@ -5,6 +5,9 @@ let cookieParser = require("cookie-parser");
 let session = require("express-session");
 let Article = require("./models/Article");
 let Category = require("./models/Category");
+let dotenv = require("dotenv");
+
+dotenv.config();
 
 app.set("view engine", "ejs");
 app.use(express.static("public"));
@@ -43,12 +46,15 @@ app.use("/", require("./routes/auth"));
 app.use("/", require("./routes/admin"));
 app.use("/", require("./routes/categories"));
 
-app.listen(3000, () => {
-  console.log("Server Started on port 3000");
-});
+const CONNECTION_URL = process.env.CONNECTION_URL;
+const PORT = process.env.PORT || 5000;
 
 const mongoose = require("mongoose");
 mongoose
-  .connect("mongodb://localhost:27017/medium_clone", { useNewUrlParser: true })
+  .connect(CONNECTION_URL, { useNewUrlParser: true })
   .then(() => console.log("Connected to Mongo ...."))
   .catch((error) => console.log(error.message));
+
+app.listen(PORT, () => {
+  console.log("Server Started on port " + PORT);
+});
